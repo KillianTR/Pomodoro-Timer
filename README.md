@@ -2,7 +2,7 @@
 
 Un temporitzador Pomodoro d'alta gamma amb una estètica minimalista i moderna, inspirada en el llenguatge de disseny de Vercel. Creat per optimitzar la productivitat amb una experiència d'usuari fluida i elegant.
 
-![Pomodoro Screenshot](./public/screenshot.png)
+[![Pomodoro Screenshot](./public/screenshot.png)](https://pomodoro-timer-killiantr.vercel.app)
 *Disseny premium amb efectes de transparència i fons dinàmics.*
 
 ## ✨ Features
