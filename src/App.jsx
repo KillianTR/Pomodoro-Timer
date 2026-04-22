@@ -4,6 +4,10 @@ import SettingsModal from "./components/SettingsModal.jsx";
 import ModeCards from "./components/ModeCards.jsx";
 import ActionBar from "./components/ActionBar.jsx";
 
+// 1. Importem les eines de Vercel
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 const DEFAULTS = {
   focusMin: 25,
   shortMin: 5,
@@ -19,7 +23,6 @@ const formatTime = (totalSeconds) => {
   return `${mm}:${ss}`;
 };
 
-// Càrrega inicial: Prioritza la configuració guardada per l'usuari al seu navegador
 function loadSettings() {
   try {
     const raw = localStorage.getItem("pomodoro_settings");
@@ -46,7 +49,6 @@ export default function App() {
     autoStartFocus: settings.autoStartFocus,
   });
 
-  // Reflecteix el temps actual al títol de la pestanya (útil si l'usuari està en un altre lloc)
   useEffect(() => {
     const timeStr = formatTime(pomodoro.secondsLeft);
     const label = pomodoro.mode === "focus" ? "Focus" : "Break";
@@ -58,7 +60,6 @@ export default function App() {
     localStorage.setItem("pomodoro_settings", JSON.stringify(next));
     setSettingsOpen(false);
 
-    // Reinicia el timer en aplicar canvis per evitar inconsistències entre minuts/segons
     pomodoro.resetToMode(pomodoro.mode, {
       durations: {
         focus: next.focusMin * 60,
@@ -92,6 +93,7 @@ export default function App() {
           />
         </main>
       </div>
+
       {settingsOpen && (
         <SettingsModal
           value={settings}
@@ -99,6 +101,10 @@ export default function App() {
           onApply={onApplySettings}
         />
       )}
+
+      {/* 2. Components de Vercel (invisibles, però funcionant) */}
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
